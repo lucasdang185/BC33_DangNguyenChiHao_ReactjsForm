@@ -1,4 +1,4 @@
-import { ADD_USER, DELETE_USER, EDIT_USER, UPDATE_USER, SEARCH_USER } from "../types";
+import { ADD_USER, DELETE_USER,EDIT_USER,UPDATE_USER ,SEARCH_USER } from "../types";
 
 const stateDefault = {
     mangSinhVien: [
@@ -9,7 +9,7 @@ const stateDefault = {
     svSearch: [],
   };
   
-  export const baiTapQuanLySinhVien = (
+  export const QuanLySinhVien = (
     state = stateDefault,
     { type, payload }
   ) => {

@@ -15,11 +15,10 @@ class DanhSachSinhVien extends Component {
   render() {
     const { mangSinhVien } = this.state;
     const { flag } = this.props;
-    // console.log(mangSinhVien);
     return (
       <div className="mt-10">
         <div>
-          <table className="container-fluid">
+          <table className="container-fluid mt-5">
             <thead className="bg-black p-5 text-white text-lg">
               <tr className="">
                 <th className="p-3"></th>
@@ -31,10 +30,10 @@ class DanhSachSinhVien extends Component {
                 <th className="p-3"></th>
               </tr>
             </thead>
-            <tbody className="border-b text-lg">
+            <tbody >
               {!flag ? (
-              <tr className="border-2">
-                <td className="text-center text-3xl" colSpan={5}>
+              <tr>
+                <td className="text-center" colSpan={5}>
                   Không tìm thấy kết quả này
                 </td>
               </tr>
@@ -48,7 +47,7 @@ class DanhSachSinhVien extends Component {
                   <td></td>
                   <td>
                     <button
-                      className="p-4 rounded-lg mr-4 bg-red-500"
+                      className="btn btn-danger me-3"
                       onClick={() => {
                         this.props.dispatch(deleteUser(item.id));
                       }}
@@ -56,7 +55,7 @@ class DanhSachSinhVien extends Component {
                       Xoá
                     </button>
                     <button
-                      className="p-4 rounded-lg bg-green-500"
+                      className="btn btn-primary"
                       onClick={() => {
                         this.props.dispatch(editUser(item.id));
                       }}
@@ -76,7 +75,7 @@ class DanhSachSinhVien extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.baiTapQuanLySinhVien,
+    ...state.QuanLySinhVien,
   };
 };
 

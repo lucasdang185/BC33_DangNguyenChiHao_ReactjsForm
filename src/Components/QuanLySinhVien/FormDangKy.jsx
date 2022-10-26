@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addUser, updateUser, searchUser } from "../../Store/actions";
+import { addUser,updateUser, searchUser } from "../../Store/actions";
 
 class FormDangKy extends Component {
   stateDefault = {
@@ -15,7 +15,6 @@ class FormDangKy extends Component {
     errors: {},
   };
   handleState = (event) => {
-    // console.log(event.target);
     const { name, value } = event.target;
     this.setState({
       values: {
@@ -25,14 +24,12 @@ class FormDangKy extends Component {
     });
   };
   handleBlur = (event) => {
-    // console.log(event);
     const {
       name,
       title,
       validationMessage,
       validity: { valueMissing, patternMismatch },
     } = event.target;
-    // console.log("patternMismatch: ", patternMismatch);
 
     let mess = "";
     if (valueMissing) {
@@ -42,9 +39,6 @@ class FormDangKy extends Component {
       switch (name) {
         case "maSV":
           mess = `${title} phải từ 5 đến 15 ký tự`;
-          break;
-        case "fullName":
-          mess = `${title} `;
           break;
         case "phoneNumber":
           mess = `${title} phải là số và 10 số`;
@@ -61,7 +55,6 @@ class FormDangKy extends Component {
     });
   };
   handleSubmit = (event) => {
-    // console.log(event.target.checkValidity());
     event.preventDefault();
     if (!event.target.checkValidity()) {
       return;
@@ -84,13 +77,11 @@ class FormDangKy extends Component {
   };
 
   handleSearch = () => {
-    // console.log(this.state.key);
     this.props.dispatch(searchUser(this.state.key));
   };
 
   // Chuyển props thành state nội bộ của component
   static getDerivedStateFromProps = (nextProps, currentState) => {
-    // console.log(nextProps, currentState);
     if (
       nextProps.selectedUser &&
       nextProps.selectedUser.id !== currentState.values.id
@@ -128,7 +119,7 @@ class FormDangKy extends Component {
                 onChange={this.handleState}
                 onBlur={this.handleBlur}
               />
-              <span className="text-red-500 text-20">
+              <span>
                 {this.state.errors.maSV}
               </span>
             </div>
@@ -145,7 +136,7 @@ class FormDangKy extends Component {
                 onChange={this.handleState}
                 onBlur={this.handleBlur}
               />
-              <span className="text-red-500 text-20">
+              <span>
                 {this.state.errors.fullName}
               </span>
             </div>
@@ -163,7 +154,7 @@ class FormDangKy extends Component {
                 onChange={this.handleState}
                 onBlur={this.handleBlur}
               />
-              <span className="text-red-500 text-20">
+              <span>
                 {this.state.errors.phoneNumber}
               </span>
             </div>
@@ -181,12 +172,12 @@ class FormDangKy extends Component {
                 onChange={this.handleState}
                 onBlur={this.handleBlur}
               />
-              <span className="text-red-500 text-20">
+              <span>
                 {this.state.errors.email}
               </span>
             </div>
           </div>
-          <div className="m-5">
+          <div className="mt-3 ms-5">
             <button
               type="submit"
               className={`btn btn-success ${!this.props.selectedUser ? "" : "hidden"
@@ -195,22 +186,30 @@ class FormDangKy extends Component {
             >
               Thêm Sinh Viên
             </button>
+            <button
+              type="submit"
+              className={`btn btn-success ms-3 ${this.props.selectedUser ?? "hidden"
+                }`}
+            >
+              Cập Nhật
+            </button>
             
           </div>
-          <div className="w-[50%] mt-5">
+          
+          <div className="mt-5 ms-5">
             <p className="text-left">Tìm sinh viên</p>
-            <div className="flex justify-start">
+            <div className="col-4">
               <input
                 type="search"
                 name="Search"
                 value={this.state.key}
                 placeholder="Nhập tên SV"
-                className="border-2 border-black  rounded-sm p-3 mt-4 w-[300px]"
+                className="form-control"
                 onChange={this.handleKey} />
               <button
                 type="button"
                 title="search"
-                className="ml-5 h-[35px] mt-4 px-4 bg-blue-500 rounded-sm text-white cursor-pointer hover:bg-blue-700"
+                className="btn btn-success mt-3"
                 onClick={this.handleSearch}>
                 Tìm
               </button>
@@ -224,7 +223,7 @@ class FormDangKy extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.baiTapQuanLySinhVien,
+    ...state.QuanLySinhVien,
   };
 };
 
